@@ -115,6 +115,56 @@
                 var status        = $('#input-status').val();
                 var description   = $('#input-description').val();
 
+                if (!name) {
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'The name field is required'
+                    })
+                    return false;
+                }
+                if (!categoryId) {
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'The category field is required'
+                    })
+                    return false;
+                }
+                if (!brandId) {
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'The brand field is required'
+                    })
+                    return false;
+                }
+                if (!price) {
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'The price field is required'
+                    })
+                    return false;
+                }
+                if (!sellingPrice) {
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'The selling price field is required'
+                    })
+                    return false;
+                }
+                if (!quantity) {
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'The quantity field is required'
+                    })
+                    return false;
+                }
+                if (!status) {
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'The status field is required'
+                    })
+                    return false;
+                }
+
                 axios.put(`/admin/products/${productID}`, {
                     name: name,
                     category_id: categoryId,

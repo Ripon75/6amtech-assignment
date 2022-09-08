@@ -16,7 +16,8 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::with(['category', 'brand'])->get();
+        $products = Product::with(['category', 'brand'])
+        ->orderBy('created_at', 'desc')->get();
 
         return view('admin.product.index', [
             'products' => $products
@@ -55,7 +56,7 @@ class ProductController extends Controller
         $brandID       = $request->input('brand_id', null);
         $price         = $request->input('price', null);
         $sellingPrice  = $request->input('selling_price', null);
-        $tax           = $request->input('tax', null);
+        $tax           = $request->input('tax', 0);
         $quantity      = $request->input('quantity', null);
         $status        = $request->input('status', null);
         $description   = $request->input('description', null);
@@ -69,7 +70,7 @@ class ProductController extends Controller
         $productObj->brand_id       = $brandID;
         $productObj->price          = $price;
         $productObj->selling_price  = $sellingPrice;
-        $productObj->tax            = $tax;
+        $productObj->tax            = $tax ?? 0;
         $productObj->quantity       = $quantity;
         $productObj->status         = $status;
         $productObj->description    = $description;
@@ -125,7 +126,7 @@ class ProductController extends Controller
         $brandID       = $request->input('brand_id', null);
         $price         = $request->input('price', null);
         $sellingPrice  = $request->input('selling_price', null);
-        $tax           = $request->input('tax', null);
+        $tax           = $request->input('tax', 0);
         $quantity      = $request->input('quantity', null);
         $status        = $request->input('status', null);
         $description   = $request->input('description', null);
@@ -139,7 +140,7 @@ class ProductController extends Controller
         $productObj->brand_id       = $brandID;
         $productObj->price          = $price;
         $productObj->selling_price  = $sellingPrice;
-        $productObj->tax            = $tax;
+        $productObj->tax            = $tax ?? 0;
         $productObj->quantity       = $quantity;
         $productObj->status         = $status;
         $productObj->description    = $description;
