@@ -14,7 +14,31 @@
 
     </head>
     <body class="">
-       @yield('content')
+
+        <div class="container">
+            {{-- start navbar --}}
+            <div class="row">
+                <div class="col-md-10 offset-1">
+                    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                        <div class="container-fluid">
+                            <div class="collapse navbar-collapse" id="navbarNav">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="{{ route('products.index') }}">Products</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="{{ route('products.bulk') }}">Bulk upload</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            {{-- end navbar --}}
+    
+        </div>
+        @yield('content')
     </body>
 
     {{-- bootstrap cdn --}}
