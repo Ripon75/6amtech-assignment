@@ -12,6 +12,6 @@ Route::post('/login',    [Authcontroller::class, 'login']);
 // Get product route
 Route::get('/products/list', [ProductController::class, 'getProduct']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware(['auth:api'])->group(function() {
+    Route::get('user/details', [Authcontroller::class, 'userDetail']);
 });

@@ -17,11 +17,14 @@
 
     </head>
     <body class="">
-
-        <div class="container mt-1">
+        <div class="container mt-1">    
             {{-- start navbar --}}
             <div class="row">
                 <div class="col-md-10 offset-1">
+                    {{-- Flash message --}}
+                    @if(Session::has('message'))
+                        <div class="alert alert-info">{{ Session::get('message') }}</div>
+                    @endif
                     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
                         <div class="container-fluid">
                             <div class="collapse navbar-collapse" id="navbarNav">

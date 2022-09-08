@@ -11,6 +11,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Brand;
 use DB;
+use Auth;
 
 class ProductController extends Controller
 {
@@ -305,7 +306,7 @@ class ProductController extends Controller
                         $productObj->selling_price = $sellingPrice;
                         $productObj->tax           = $tax ?? 0;
                         $productObj->quantity      = $quantity;
-                        $productObj->status        = 'active';
+                        $productObj->status        = $status;
                         $productObj->description   = $description ?? null;
                         $productObj->save();
                         DB::commit();

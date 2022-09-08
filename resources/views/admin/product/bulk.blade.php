@@ -4,11 +4,6 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10 offset-1">
-                {{-- Flash message --}}
-                @if(Session::has('message'))
-                    <div class="alert alert-info">{{ Session::get('message') }}</div>
-                @endif
-
                 <div class="card">
                     <div class="card-header">
                         Product Bulk Upload

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Utility\CommonUtils;
 use App\Models\User;
+use Auth;
 
 class Authcontroller extends Controller
 {
@@ -56,7 +57,7 @@ class Authcontroller extends Controller
         [
             'email.required' => 'please enter username or email or phone number'
         ]
-    );
+        );
 
         if ($validator->stopOnFirstFailure()->fails()) {
             return CommonUtils::sendError($validator->errors(), __('common.validationErr'), null);
@@ -66,13 +67,22 @@ class Authcontroller extends Controller
         $password = $request->input('password', null);
 
         $checkUser = User::where('email', $email)->orWhere('username', $email)
-        ->orWhere('phone_number', $email)->first();
+            ->orWhere('phone_number', $email)->first();
 
         if($checkUser && Hash::check($password, $checkUser->password)) {
-            $token = $checkUser->createToken($checkUser->username, ['user_type:'.$checkUser->user_type])->accessToken;
+            $token = $checkUser->createToken('user-token')->accessToken;
             return CommonUtils::sendResponse($checkUser, __('user.lSuccess'), $token);
         } else {
             return CommonUtils::sendError(null, __('user.lFailed'), null);
+        }
+    }
+
+    public function userDetail()
+    {
+        $user = Auth::user();
+
+        if ($user) {
+            return CommonUtils::sendResponse($user, __('Auth user detail information'));
         }
     }
 }
