@@ -11,7 +11,7 @@
                 <div class="card">
                 <div class="card-header">
                     Permission Edit
-                    <a href="{{ route('permissions.index') }}" class="btn btn-success btn-sm float-end">Products</a>
+                    <a href="{{ route('permissions.index') }}" class="btn btn-success btn-sm float-end">Permissions</a>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('permissions.update', $permission->id) }}" method="POST">

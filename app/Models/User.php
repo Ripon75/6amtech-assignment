@@ -44,8 +44,4 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function findForPassport($username) {
-       return self::where('email', $username)->first(); // change column name whatever you use in credentials
-    }
 }

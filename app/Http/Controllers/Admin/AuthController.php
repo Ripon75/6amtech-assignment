@@ -19,8 +19,7 @@ class Authcontroller extends Controller
             'email'                 => ['required', 'email', 'unique:users,email'],
             'phone_number'          => ['required', 'unique:users,phone_number'],
             'password'              => ['required', 'confirmed', 'min:8'],
-            'password_confirmation' => ['required'],
-            'user_type'             => ['required']
+            'password_confirmation' => ['required']
         ]);
 
         if ($validator->stopOnFirstFailure()->fails()) {
@@ -30,7 +29,7 @@ class Authcontroller extends Controller
         $username    = $request->input('username', null);
         $email       = $request->input('email', null);
         $phoneNumber = $request->input('phone_number', null);
-        $userType    = $request->input('user_type', null);
+        $roleID      = $request->input('role_id', null);
         $password    = $request->input('password', null);
 
         $user = new User();
@@ -38,10 +37,11 @@ class Authcontroller extends Controller
         $user->username     = $username;
         $user->email        = $email;
         $user->phone_number = $phoneNumber;
-        $user->user_type    = $userType;
+        $user->role_id      = $roleID;
         $user->password     = Hash::make($password);
         $res = $user->save();
         if ($res) {
+            $user->syncRoles([$roleID]);
             return CommonUtils::sendResponse($user, __('user.rSuccess'), null);
         } else {
             return CommonUtils::sendError(null, __('user.rFailed'), null);
@@ -77,8 +77,12 @@ class Authcontroller extends Controller
         }
     }
 
-    public function userDetail()
+    public function userDetail(Request $request)
     {
+        if (!$request->user()->isAbleTo('products-delete')) {
+            return CommonUtils::sendError(null, __('No permission'));
+        }
+
         $user = Auth::user();
 
         if ($user) {

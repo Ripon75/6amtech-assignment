@@ -10,30 +10,38 @@
                 @endif
                 <div class="card">
                 <div class="card-header">
-                    Permission Create
-                    <a href="{{ route('permissions.index') }}" class="btn btn-success btn-sm float-end">Permissions</a>
+                    Role Create
+                    <a href="{{ route('roles.index') }}" class="btn btn-success btn-sm float-end">Roles</a>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('permissions.store') }}" method="POST">
+                    <form action="{{ route('roles.store') }}" method="POST">
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label">Display Name</label>
                                     <input type="text" class="form-control" name="display_name">
+                                    @error('display_name')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
-                                @error('display_name')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label">Description</label>
                                     <input type="text" class="form-control" name="description">
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                @foreach ($permissions as $permission)
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="permission_ids[]" value="{{ $permission->id }}">
+                                    <label class="form-check-label">
+                                        {{ $permission->display_name }}
+                                    </label>
+                                </div>
+                                @endforeach
+                            </div>
                         </div>
-                         <button type="submit" class="btn btn-primary float-end">Submit</button>
+                        <button type="submit" class="btn btn-primary float-end">Submit</button>
                     </form>
                 </div>
             </div>
