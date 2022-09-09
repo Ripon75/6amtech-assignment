@@ -208,9 +208,9 @@ class ProductController extends Controller
 
     public function bulkUpload(Request $request)
     {
-        // $request->validate([
-        //     'uploaded_file' => ['file', 'mimes:csv']
-        // ]);
+        $request->validate([
+            'uploaded_file' => ['required', 'file', 'mimes:csv']
+        ]);
 
         $file = $request->file('uploaded_file');
 

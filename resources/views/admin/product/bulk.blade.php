@@ -15,6 +15,9 @@
                             <div class="">
                                 <input type="file" name="uploaded_file" id="file" accept=".csv">
                                 <button type="submit" class="btn btn-primary">Submit</button>
+                                @error('uploaded_file')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </form>
                     </div>
