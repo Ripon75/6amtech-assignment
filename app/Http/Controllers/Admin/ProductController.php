@@ -25,7 +25,7 @@ class ProductController extends Controller
         ]);
     }
 
-    public function create()
+    public function create(Request $request)
     {
         $brands     = Brand::where('status', 1)->get();
         $categories = Category::where('status', 1)->get();
@@ -77,9 +77,9 @@ class ProductController extends Controller
         $productObj->description    = $description;
         $res = $productObj->save();
         if ($res) {
-            return CommonUtils::sendResponse($productObj, __('product.create'));
+            return CommonUtils::sendResponse($productObj, __('product.create'), null);
         } else {
-            return CommonUtils::sendError(null, __('product.failed'));
+            return CommonUtils::sendError(null, __('product.failed'), null);
         }
     }
 
@@ -91,7 +91,6 @@ class ProductController extends Controller
             'product' => $product
         ]);
     }
-
 
     public function edit($id)
     {

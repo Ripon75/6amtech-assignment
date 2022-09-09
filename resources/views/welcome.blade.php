@@ -33,7 +33,13 @@
                                         <a class="nav-link active" href="{{ route('products.index') }}">Products</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link active" href="{{ route('products.bulk') }}">Bulk upload</a>
+                                        <a class="nav-link active" href="{{ route('products.bulk') }}">ProductBulkUpload</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="{{ route('permissions.index') }}">Permissions</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="{{ route('roles.index') }}">Roles</a>
                                     </li>
                                 </ul>
                             </div>
@@ -73,6 +79,11 @@
                 toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
         })
+
+        // Set time to flash message
+        setTimeout(function(){
+            $("div.alert").remove();
+        }, 4000 );
     </script>
 
     @stack('scripts')

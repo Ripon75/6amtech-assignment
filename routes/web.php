@@ -1,17 +1,23 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\PermissionController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('products.index');
 });
 
 Route::prefix('admin')->group(function() {
-    // product bulk upload
+    // Product bulk upload
     Route:: get('/products/bulk',  [ProductController::class, 'bulk'])->name('products.bulk');
     Route:: post('/products/bulk', [ProductController::class, 'bulkUpload'])->name('products.bulk.upload');
-    // product crud route
+    // Product crud route
     Route::resource('products', ProductController::class);
+    // Permission crud route
+    Route::resource('permissions', PermissionController::class);
+    // Role crud route
+    Route::resource('roles', RoleController::class);
 });
 
