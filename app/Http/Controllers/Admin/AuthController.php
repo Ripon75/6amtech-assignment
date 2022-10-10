@@ -48,6 +48,11 @@ class Authcontroller extends Controller
         }
     }
 
+    public function loginView()
+    {
+        return view('auth.login');
+    }
+
    public function login(Request $request)
     {
        $validator = Validator::make($request->all(), [

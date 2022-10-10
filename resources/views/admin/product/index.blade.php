@@ -59,8 +59,10 @@
 @push('scripts')
     <script>
         btnDelete = $('.btn-delete');
+        // login();
 
         $(function() {
+
             btnDelete.click(function() {
                 Swal.fire({
                 title: 'Are you sure?',
@@ -78,6 +80,19 @@
                
             });
         });
+
+        function login() {
+            axios.post('/api/login', {
+                'email': '01764997485',
+                'password': '123456789'
+            })
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        }
 
         function deleteProduct(productID) {
             axios.delete(`/admin/products/${productID}`)
